@@ -28,7 +28,6 @@ with st.form("user_form"):
 # Save to DB
 if submit:
     if name:
-
         requests.post("https://fastapisqlite.onrender.com/users", params={"name": name, "age": age})
         if response.status_code == 200:
             st.success("Saved to database ✅")
