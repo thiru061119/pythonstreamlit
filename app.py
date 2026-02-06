@@ -22,7 +22,7 @@ st.title("User Data")
 # Form
 with st.form("user_form"):
     name = st.text_input("Enter Name")
-    age = st.number_input("Enter Age", min_value=21, max_value=45)
+    age = st.number_input("Enter Age", min_value=21, max_value=100)
     submit = st.form_submit_button("Save")
 
 # Save to DB
