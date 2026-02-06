@@ -28,6 +28,12 @@ with st.form("user_form"):
 # Save to DB
 if submit:
     if name:
+
+        requests.post("https://fastapisqlite.onrender.com/users", params={"name": name, "age": age})
+        if response.status_code == 200:
+            st.success("Saved to database ✅")
+        else:
+            st.error("Backend error ❌")
         cursor.execute(
             "INSERT INTO users (name, age) VALUES (?, ?)",
             (name, age)
@@ -38,14 +44,14 @@ if submit:
         st.error("Name is required")
 
 # Show data
-st.subheader("Saved Users")
-rows = cursor.execute("SELECT name, age FROM users").fetchall()
-st.table(rows)
+if st.button("Load users"):
+    res = requests.get("https://fastapisqlite.onrender.com/users")
+    st.table(res.json())
+#st.subheader("Saved Users")
+#rows = cursor.execute("SELECT name, age FROM users").fetchall()
+#st.table(rows)
 
 
-requests.post(
-  "https://https://fastapisqlite.onrender.com/users",
-  params={"name": name, "age": age}
-)
+
 
 
