@@ -1,5 +1,6 @@
 import streamlit as st
 import sqlite3
+import requests
 
 # Connect to database
 conn = sqlite3.connect("database.db", check_same_thread=False)
@@ -40,4 +41,11 @@ if submit:
 st.subheader("Saved Users")
 rows = cursor.execute("SELECT name, age FROM users").fetchall()
 st.table(rows)
+
+
+requests.post(
+  "https://https://fastapisqlite.onrender.com/users",
+  params={"name": name, "age": age}
+)
+
 
